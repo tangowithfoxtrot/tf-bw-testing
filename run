@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eo pipefail
+set -e
 IFS=$'\n\t'
 
 check_tfvars() {
@@ -8,8 +8,8 @@ check_tfvars() {
         cat > terraform.tfvars << 'TFEOF'
 # Bitwarden Secrets Provider Configuration
 # Required values:
-api_url        = "https://api.bitwarden.com"
-identity_url   = "https://identity.bitwarden.com"
+api_url         = "https://api.bitwarden.com"
+identity_url    = "https://identity.bitwarden.com"
 organization_id = "your-organization-id-here"
 TFEOF
         printf "\n"
