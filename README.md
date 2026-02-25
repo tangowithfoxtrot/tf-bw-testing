@@ -1,9 +1,9 @@
+> [!WARNING]
+> This Terraform project will output sensitive information to the `out/` directory, including secret details. This is intended for testing purposes only. Do not use this project with real (sensitive) secrets.
+
 # Bitwarden Terraform Testing
 
 This project provides a `run` script to test the Bitwarden Secrets Terraform provider against your infrastructure in either production or test mode.
-
-> [!WARNING]
-> This Terraform project will output sensitive information to the `out/` directory, including secret details. This is intended for testing purposes only. Do not use this project with real (sensitive) secrets.
 
 ## Prerequisites
 
