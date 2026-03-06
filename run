@@ -180,6 +180,8 @@ test() {
         exit 1
     fi
 
+    _terraform init || true >/dev/null # we need to do this ONCE to download the hashicorp/local provider
+
     trap cleanup_terraformrc EXIT
 
     # 1. Download the latest test artifact from GH from the branch we're testing against.

@@ -1,9 +1,12 @@
 > [!WARNING]
-> This Terraform project will output sensitive information to the `out/` directory, including secret details. This is intended for testing purposes only. Do not use this project with real (sensitive) secrets.
+> This Terraform project will output sensitive information to the `out/`
+> directory, including secret details. This is intended for testing purposes
+> only. Do not use this project with real (sensitive) secrets.
 
 # Bitwarden Terraform Testing
 
-This project provides a `run` script to test the Bitwarden Secrets Terraform provider against your infrastructure in either production or test mode.
+This project provides a `run` script to test the Bitwarden Secrets Terraform
+provider against your infrastructure in either production or test mode.
 
 ## Prerequisites
 
@@ -13,17 +16,25 @@ This project provides a `run` script to test the Bitwarden Secrets Terraform pro
 
 ## Quick Start
 
+Before running anything, you need to run `tofu init | terraform init` one time
+to download the `local` provider. You shouldn't need to run this again after the
+first time.
+
 ```bash
 ./run
 ```
 
-Running the script with no arguments launches interactive mode, which guides you through the setup process.
+Running the script with no arguments launches interactive mode, which guides you
+through the setup process.
 
 ## Environment Variables
 
 - `BW_ACCESS_TOKEN` - Your Bitwarden access token (required)
-- `EDITOR` or `VISUAL` - Used for editing `terraform.tfvars` in interactive mode (defaults to `vi`)
-- `TF_BINARY` - Used to manually specify either `terraform` or `tofu` if you have both installed (optional). Defaults to `tofu` if available, otherwise `terraform`.
+- `EDITOR` or `VISUAL` - Used for editing `terraform.tfvars` in interactive mode
+  (defaults to `vi`)
+- `TF_BINARY` - Used to manually specify either `terraform` or `tofu` if you
+  have both installed (optional). Defaults to `tofu` if available, otherwise
+  `terraform`.
 
 ## Interactive Mode
 
@@ -31,7 +42,8 @@ When you run `./run` with no arguments, the script will:
 
 1. **Configure `terraform.tfvars`** (if needed)
    - Opens your `$EDITOR` (or `$VISUAL`, defaults to `vi`)
-   - Requires the following to be set: `api_url`, `identity_url`, `organization_id`
+   - Requires the following to be set: `api_url`, `identity_url`,
+     `organization_id`
 
 2. **Set up BW_ACCESS_TOKEN** (if not already set)
    - Prompts you to enter your Bitwarden access token
@@ -39,7 +51,8 @@ When you run `./run` with no arguments, the script will:
 
 3. **Choose a mode:**
    - **1) prod** - Uses the latest released provider version from the registry
-   - **2) test** - Uses a test provider build from a specific branch (you provide the branch name)
+   - **2) test** - Uses a test provider build from a specific branch (you
+     provide the branch name)
    - **3) help** - Shows usage information
    - **4) exit** - Exit without running
 
@@ -83,7 +96,9 @@ organization_id = "<your-organization-id-here>"
 # access_token    = "<your-access-token-here>" # optional; can also set BW_ACCESS_TOKEN env var instead
 ```
 
-Replace `<your-organization-id-here>` with your actual organization ID. Replace `<your-access-token-here>` with your Bitwarden access token, or you can set it as an environment variable instead (see next step).
+Replace `<your-organization-id-here>` with your actual organization ID. Replace
+`<your-access-token-here>` with your Bitwarden access token, or you can set it
+as an environment variable instead (see next step).
 
 ### 2. Set `BW_ACCESS_TOKEN` (if access_token is not set in terraform.tfvars)
 
@@ -114,9 +129,12 @@ terraform apply -auto-approve
 
 To test with a provider build from a GitHub branch:
 
-1. Download the test artifact from the GitHub Actions workflow for the branch you're testing against.
-2. Extract the provider binary and place it in a local directory (e.g., `/tmp/test-artifact/`).
-3. Create a `.terraformrc` in your home directory with the following content to override the provider:
+1. Download the test artifact from the GitHub Actions workflow for the branch
+   you're testing against.
+2. Extract the provider binary and place it in a local directory (e.g.,
+   `/tmp/test-artifact/`).
+3. Create a `.terraformrc` in your home directory with the following content to
+   override the provider:
 
 ```hcl
 provider_installation {
