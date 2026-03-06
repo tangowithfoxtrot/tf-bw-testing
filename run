@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -ex
 IFS=$'\n\t'
 
 check_tfvars() {
@@ -136,7 +136,7 @@ main() {
     esac
 }
 
-terraform() {
+_terraform() {
     if [ -n "$TF_BINARY" ]; then
         if command -v "$TF_BINARY" >/dev/null 2>&1; then
           "$TF_BINARY" "$@"
@@ -163,9 +163,9 @@ prod() {
         mv "$HOME/.terraformrc" "$HOME/.terraformrc.backup"
     fi
 
-    terraform init -upgrade
-    terraform plan
-    terraform apply -auto-approve
+    _terraform init -upgrade
+    _terraform plan
+    _terraform apply -auto-approve
 
     green_bold "Project built successfully with the latest released provider version!"
     printf "Verify the output in the 'out' directory.\n"
@@ -230,8 +230,8 @@ provider_installation {
 EOF
 
     # Step 4: Run terraform without init
-    terraform plan
-    terraform apply -auto-approve
+    _terraform plan
+    _terraform apply -auto-approve
 
     green_bold "Project built successfully with the test provider build from branch '$branch_to_test'!"
     printf "Verify the output in the 'out' directory.\n"
